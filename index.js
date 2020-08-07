@@ -51,7 +51,7 @@ async function msgHandler (client, message) {
         const { pushname } = sender
         const { formattedTitle } = chat
         const time = moment(t * 1000).format('DD/MM HH:mm:ss')
-        const commands = ['P', 'p', 'Assalamualaikum', 'assalamualaikum', '#halo', '#hi', '#hai', '#menu','#help','#sticker', '#stiker', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook']
+        const commands = ['makasih', 'Makasih', 'terima kasih', 'Terima kasih', 'terimakasih', 'Terimakasih', 'Assalamu', 'assalamu', 'Assalamualaikum', 'assalamualaikum', '#halo', '#hi', '#hai', '#menu','#help','#sticker', '#stiker', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook']
         const cmds = commands.map(x => x + '\\b').join('|')
         const cmd = type === 'chat' ? body.match(new RegExp(cmds, 'gi')) : type === 'image' && caption ? caption.match(new RegExp(cmds, 'gi')) : ''
 
@@ -66,10 +66,18 @@ async function msgHandler (client, message) {
                 case '#halo':
                     client.sendText(from, 'Hai bot aktif')
                     break
-                case 'P':
-                case 'p':
-                    client.sendText(from, 'Yang sopan dong sama bot!')
+                 case 'makasih':
+                case 'Makasih':
+                case 'terima kasih':
+                case 'Terima kasih':
+                case 'terimakasih':
+                case 'Terimakasih':
+                case 'thx':
+                case 'Thx':
+                    client.sendText(from, 'Terima kasih kembali 😁')
                     break
+                case 'Assalamu':
+                case 'assalamu':
                 case 'Assalamualaikum':
                 case 'assalamualaikum':
                     client.sendText(from, 'Wa ‘alaikumus salam wa rahmatullahi wabarakatuh')
