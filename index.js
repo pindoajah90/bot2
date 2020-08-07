@@ -21,8 +21,8 @@ const opsys = process.platform;
 if (opsys === "win32" || opsys === "win64") {
     serverOption['executablePath'] = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
 } else if (opsys === "linux") {
-    //serverOption['browserRevision'] = '737027';
-    serverOption['executablePath'] = '/usr/bin/google-chrome';
+    serverOption['browserRevision'] = '737027';
+    //serverOption['executablePath'] = '/usr/bin/google-chrome';
 } else if (opsys === "darwin") {
     serverOption['executablePath'] = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 }
@@ -51,7 +51,7 @@ async function msgHandler (client, message) {
         const { pushname } = sender
         const { formattedTitle } = chat
         const time = moment(t * 1000).format('DD/MM HH:mm:ss')
-        const commands = ['#halo', '#hi', '#hai', '#menu','#help','#sticker', '#stiker', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook']
+        const commands = ['P', 'p', 'Assalamualaikum', 'assalamualaikum', '#halo', '#hi', '#hai', '#menu','#help','#sticker', '#stiker', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook']
         const cmds = commands.map(x => x + '\\b').join('|')
         const cmd = type === 'chat' ? body.match(new RegExp(cmds, 'gi')) : type === 'image' && caption ? caption.match(new RegExp(cmds, 'gi')) : ''
 
@@ -66,9 +66,17 @@ async function msgHandler (client, message) {
                 case '#halo':
                     client.sendText(from, 'Hai bot aktif')
                     break
+                case 'P':
+                case 'p':
+                    client.sendText(from, 'Yang sopan dong sama bot!')
+                    break
+                case 'Assalamualaikum':
+                case 'assalamualaikum':
+                    client.sendText(from, 'Wa ‘alaikumus salam wa rahmatullahi wabarakatuh')
+                    break
                 case '#menu':
                 case '#help':
-                    client.sendText(from, 'Selamat datang di Bot Online (Botol) \n\nFitur yang tersedia: \n1. #sticker / #stiker: kirim gambar dengan caption atau balas gambar yang sudah dikirim. \n2. #sticker / #stiker spasi url gambar (contoh: #stiker https://avatars2.githubusercontent.com/u/24309806) \n3. #tiktok spasi url (contoh: #tiktok https://www.tiktok.com/@ipanpanjoel/video/685521...) \n4. #ig / #instagram spasi url (contoh: #ig https://www.instagram.com/p/CDitDVuA...) \n5. #fb spasi url (contoh: #fb / #facebook https://www.facebook.com/@ipanpanjoels/videos/119781...) \n6. #twt / #twitter spasi url (contoh: #twt https://twitter.com/ipanpanjoels/status/129124...) \nSelamat mencoba~ \n\n\nDonasi untuk support aku membeli siomay melalui: \nhttps://saweria.co/donate/bpteam')
+                    client.sendText(from, 'Selamat datang di Bot Online (Botol) \n\nDILARANG KERAS MENELPON BOT!!! \n\nFitur yang tersedia: \n1. #sticker / #stiker: kirim gambar dengan caption atau balas gambar yang sudah dikirim. \n2. #sticker / #stiker spasi url gambar (contoh: #stiker https://avatars2.githubusercontent.com/u/24309806) \n3. #tiktok spasi url (contoh: #tiktok https://www.tiktok.com/@ipanpanjoel/video/685521...) \n4. #ig / #instagram spasi url (contoh: #ig https://www.instagram.com/p/CDitDVuA...) \n5. #fb / #facebook spasi url (contoh: #fb https://www.facebook.com/@ipanpanjoels/videos/119781...) \n6. #twt / #twitter spasi url (contoh: #twt https://twitter.com/ipanpanjoels/status/129124...) \nSelamat mencoba~ \n\n\nDonasi untuk support bot ini agar terus jalan melalui: \nhttps://saweria.co/donate/bpteam')
                     break
                 case '#sticker':
                 case '#stiker':
@@ -101,7 +109,7 @@ async function msgHandler (client, message) {
                             .then((videoMeta) => {
                                 const filename = videoMeta.authorMeta.name + '.mp4'
                                 client.sendFile(from, videoMeta.videobase64, filename, videoMeta.NoWaterMark ? '' : '⚠ Video tanpa watermark tidak tersedia.')
-                                    .then(() => client.sendText(from, `Metadata:\nUsername: ${videoMeta.authorMeta.name} \nMusic: ${videoMeta.musicMeta.musicName} \nView: ${videoMeta.playCount.toLocaleString()} \nLike: ${videoMeta.diggCount.toLocaleString()} \nComment: ${videoMeta.commentCount.toLocaleString()} \nShare: ${videoMeta.shareCount.toLocaleString()} \nCaption: ${videoMeta.text.trim() ? videoMeta.text : '-'} \n\nDonasi: kamu dapat membantuku beli dimsum dengan menyawer melalui https://saweria.co/donate/yogasakti atau mentrakteer melalui https://trakteer.id/red-emperor \nTerimakasih.`))
+                                    .then(() => client.sendText(from, `Metadata:\nUsername: ${videoMeta.authorMeta.name} \nMusic: ${videoMeta.musicMeta.musicName} \nView: ${videoMeta.playCount.toLocaleString()} \nLike: ${videoMeta.diggCount.toLocaleString()} \nComment: ${videoMeta.commentCount.toLocaleString()} \nShare: ${videoMeta.shareCount.toLocaleString()} \nCaption: ${videoMeta.text.trim() ? videoMeta.text : '-'}`))
                                     .catch(err => console.log('Caught exception: ', err))
                             }).catch((err) => {
                                 client.sendText(from, 'Gagal mengambil metadata, link yang kamu kirim tidak valid')
@@ -167,7 +175,7 @@ async function msgHandler (client, message) {
                                         console.log('Shortlink: ' + shorthd.shortLink)
                                         const shortsd = await urlShortener(sd)
                                         console.log('Shortlink: ' + shortsd.shortLink)
-                                        client.sendText(from, `Link Download: \nHD Quality: ${shorthd.shortLink} \nSD Quality: ${shortsd.shortLink} \n\nDonasi: kamu dapat membantuku beli dimsum dengan menyawer melalui https://saweria.co/donate/yogasakti atau mentrakteer melalui https://trakteer.id/red-emperor \nTerimakasih.`)
+                                        client.sendText(from, `Link Download: \nHD Quality: ${shorthd.shortLink} \nSD Quality: ${shortsd.shortLink}`)
                                     } catch (err) {
                                         client.sendText(from, `Error, ` + err)
                                     }
