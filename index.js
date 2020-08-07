@@ -51,7 +51,7 @@ async function msgHandler (client, message) {
         const { pushname } = sender
         const { formattedTitle } = chat
         const time = moment(t * 1000).format('DD/MM HH:mm:ss')
-        const commands = ['makasih', 'Makasih', 'terima kasih', 'Terima kasih', 'terimakasih', 'Terimakasih', 'Assalamu', 'assalamu', 'Assalamualaikum', 'assalamualaikum', '#halo', '#hi', '#hai', '#menu','#help','#sticker', '#stiker', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook']
+        const commands = ['makasih', 'Makasih', 'terima kasih', 'Terima kasih', 'terimakasih', 'Terimakasih', 'thx', 'Thx', 'thank', 'Thank', 'Assalamu', 'assalamu', 'Assalamualaikum', 'assalamualaikum', '#halo', '#hi', '#hai', '#menu','#help','#sticker', '#stiker', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook']
         const cmds = commands.map(x => x + '\\b').join('|')
         const cmd = type === 'chat' ? body.match(new RegExp(cmds, 'gi')) : type === 'image' && caption ? caption.match(new RegExp(cmds, 'gi')) : ''
 
@@ -74,6 +74,8 @@ async function msgHandler (client, message) {
                 case 'Terimakasih':
                 case 'thx':
                 case 'Thx':
+                case 'thank':
+                case 'Thank':
                     client.sendText(from, 'Terima kasih kembali 😁')
                     break
                 case 'Assalamu':
